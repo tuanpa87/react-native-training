@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, Text, Button, Icon } from "react-native-elements";
 
-const renderAlbums = data => {
-  return data.map((album, index) => (
-    <Card key={index} title={album.title} image={{ uri: album.image }}>
+const renderData = data => {
+  return data.map((item, index) => (
+    <Card key={index} title={item.title} image={{ uri: item.cover_medium }}>
       <Button
         icon={<Icon name="code" color="#ffffff" />}
         backgroundColor="#03A9F4"
@@ -13,10 +13,15 @@ const renderAlbums = data => {
           marginRight: 0,
           marginBottom: 0
         }}
-        title="VIEW NOW"
+        title="See the Detail"
       />
     </Card>
   ));
 };
 
-export default (CardList = props => renderAlbums(props.data));
+export default (CardList = props =>
+  props.data && props.data.length ? (
+    renderData(props.data)
+  ) : (
+    <Text> ...Loading Data </Text>
+  ));

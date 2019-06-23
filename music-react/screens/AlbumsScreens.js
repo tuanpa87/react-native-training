@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Card, Text, Button, Icon } from "react-native-elements";
 import CardList from "../components/CardList";
+import SearchBar from "../components/SearchBar";
+import * as actions from "../actions/";
 
 export default class AlbumsScreens extends Component {
   static navigationOptions = {
@@ -9,26 +11,18 @@ export default class AlbumsScreens extends Component {
   };
 
   state = {
-    albums: [
-      {
-        title: "13424",
-        image: "https://placeimg.com/640/480/any"
-      },
-      {
-        title: "13425",
-        image: "https://placeimg.com/640/480/any"
-      },
-      {
-        title: "13426",
-        image: "https://placeimg.com/640/480/any"
-      }
-    ]
+    albums: []
   };
+
+  searchTracks(keyword) {
+    actions.searchTracks(keyword).then(albums => this.setState({ albums }));
+  }
 
   render() {
     const { albums } = this.state;
     return (
       <ScrollView style={styles.container}>
+        <SearchBar submitSearch={keyword => this.searchTracks(keyword)} />
         <CardList data={albums} />
       </ScrollView>
     );
