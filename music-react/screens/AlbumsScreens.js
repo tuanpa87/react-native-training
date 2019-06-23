@@ -25,32 +25,11 @@ export default class AlbumsScreens extends Component {
     ]
   };
 
-  renderAlbums = () => {
-    const { albums } = this.state;
-
-    return albums.map((album, index) => (
-      <Card key={index} title={album.title} image={{ uri: album.image }}>
-        <Button
-          icon={<Icon name="code" color="#ffffff" />}
-          backgroundColor="#03A9F4"
-          buttonStyle={{
-            borderRadius: 0,
-            marginLeft: 0,
-            marginRight: 0,
-            marginBottom: 0
-          }}
-          title="VIEW NOW"
-        />
-      </Card>
-    ));
-  };
-
   render() {
+    const { albums } = this.state;
     return (
       <ScrollView style={styles.container}>
-        {(() => this.renderAlbums())()
-        // just for fun ~ this.renderAlbums()
-        }
+        <CardList data={albums} />
       </ScrollView>
     );
   }

@@ -2,8 +2,7 @@ import React from "react";
 import { Card, Text, Button, Icon } from "react-native-elements";
 
 const renderAlbums = data => {
-  const { albums } = data;
-  return albums.map((album, index) => (
+  return data.map((album, index) => (
     <Card key={index} title={album.title} image={{ uri: album.image }}>
       <Button
         icon={<Icon name="code" color="#ffffff" />}
@@ -20,8 +19,4 @@ const renderAlbums = data => {
   ));
 };
 
-export default (CardList = props => {
-  {
-    renderAlbums(props);
-  }
-});
+export default (CardList = props => renderAlbums(props.data));
