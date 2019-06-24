@@ -2,14 +2,14 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Card, Text, Button, Icon } from "react-native-elements";
 
-const renderData = data =>
+const renderData = (data, func) =>
   data.map((item, index) => (
     <Card key={index} title={item.title} image={{ uri: item.cover_medium }}>
-      {renderBottomNav()}
+      {renderBottomNav(item, func)}
     </Card>
   ));
 
-const renderBottomNav = () => (
+const renderBottomNav = (item, func) => (
   <View style={styles.albumMenu}>
     <Icon
       onPress={() => {}}
@@ -20,7 +20,7 @@ const renderBottomNav = () => (
       size={30}
     />
     <Icon
-      onPress={() => {}}
+      onPress={() => func.goDetail(item)}
       raised
       name="info"
       type="font-awesome"
@@ -38,7 +38,7 @@ const renderBottomNav = () => (
   </View>
 );
 
-export default (CardList = props => renderData(props.data));
+export default (CardList = props => renderData(props.data, props.func));
 
 const styles = StyleSheet.create({
   albumMenu: {

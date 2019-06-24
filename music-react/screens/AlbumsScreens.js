@@ -6,7 +6,7 @@ import * as actions from "../actions/";
 
 export default class AlbumsScreens extends Component {
   static navigationOptions = {
-    title: "Album"
+    title: "Albums"
   };
 
   state = {
@@ -23,6 +23,9 @@ export default class AlbumsScreens extends Component {
       .catch(err => this.setState({ isFetching: false, albums: [] }));
   }
 
+  handleGoDetail = album =>
+    this.props.navigation.navigate("AlbumDetail", { album });
+
   render() {
     const { albums, isFetching } = this.state;
     return (
@@ -30,7 +33,7 @@ export default class AlbumsScreens extends Component {
         <SearchBar submitSearch={keyword => this.searchTracks(keyword)} />
         {albums.length ? (
           !isFetching ? (
-            <CardList data={albums} />
+            <CardList data={albums} func={{ goDetail: this.handleGoDetail }} />
           ) : (
             <Text style={{ textAlign: "center" }}>Loading Albums...</Text>
           )
@@ -44,9 +47,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
-  },
-  albumMenu: {
-    flexDirection: "row",
-    justifyContent: "space-between"
   }
 });
